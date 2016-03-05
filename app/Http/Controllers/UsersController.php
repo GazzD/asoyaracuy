@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Payment;
 
 class UsersController extends Controller
 {
 	public function login()
 	{
-		return view('users.login');
+		return view('frontend.users.login');
 	}
 	
 	/**
@@ -20,22 +22,31 @@ class UsersController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$data = $this->load_common_data();
+		return $this->back_view('users.create', $data);
 	}
 	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
+	public function index() {
+    	$data = $this->load_common_data();
+    	$users = User::all();
+    	$data['users'] = $users;
+    	return $this->back_view('users.list', $data);
+    }
+    
+    public function detail($id) {
+    	$data = $this->load_common_data();
+    	$user = User::find($id);
+    	$data['user'] = $user;
+    	return $this->back_view('users.detail', $data);
+    }
+    
 	public function store(Request $request)
 	{
 		$response = "";
-		$user = User::findByHouse($request->input('house'));
+		$user = User::find_by_house($request->input('house'));
 		if($user == null){
 	
-			$response = "Error, la quinta ya está registrada";
+			$response = "Error, la quinta no está registrada";
 			return view('users.register', ['response' => $response]);
 		}
 	
@@ -50,7 +61,7 @@ class UsersController extends Controller
 		User::create([
 				'first_name' => $request->input('first_name'),
 				'last_name' => $request->input('last_name'),
-				'CI' => $request->input('CI'),
+				'ci' => $request->input('ci'),
 				'phone' => $request->input('phone'),
 				'role' => $request->input('role'),
 				'house' => $request->input('house'),
@@ -73,9 +84,16 @@ class UsersController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id)
+	public function profile()
 	{
-		//
+		//FIXME
+		$id = 1;
+		$user = User::find($id);
+		$payments = Payment::get_payments_from_user($id);
+		$data['user'] = $user;
+		$data['payments'] = $payments;
+		
+		return $this->front_view('users.profile', $data);
 	}
 	
 	/**
