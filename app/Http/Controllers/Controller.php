@@ -20,6 +20,7 @@ class Controller extends BaseController
     protected function front_view($view, $data=array()){
     	$user = User::find(1);
     	$data['user'] = $user;
+
     	return view('frontend.'.$view, $data);
     }
     

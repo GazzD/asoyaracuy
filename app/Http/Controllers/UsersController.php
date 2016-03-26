@@ -51,7 +51,7 @@ class UsersController extends Controller
 		}
 	
 	
-		$validation =Validator::make($request->all(),User::getRules());
+		$validation = Validator::make($request->all(),User::getRules());
 		if($validation->fails())
 		{
 	
@@ -59,14 +59,12 @@ class UsersController extends Controller
 		}
 	
 		User::create([
-				'first_name' => $request->input('first_name'),
-				'last_name' => $request->input('last_name'),
-				'ci' => $request->input('ci'),
+				'balance' => 0,
+				'email' => $request->input('email'),
+				'house' => $request->input('house'),
+				'password' => bcrypt($request->input('password')),
 				'phone' => $request->input('phone'),
 				'role' => $request->input('role'),
-				'house' => $request->input('house'),
-				'email' => $request->input('email'),
-				'password' => bcrypt($request->input('password')),
 		]);
 		$response = 'Quinta creada exitosamente';
 		/*
@@ -114,15 +112,32 @@ class UsersController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request)
 	{
+		$id = $request->get('id');
 		$user = User::find($id);
-		$validation =Validator::make($request->all(),User::getRules());
-		if($validation->fails())
-		{
-	
-			return redirect()->back()->withInput()->withErrors($validation->messages());
-		}
+
+		$this->validate($request, [
+	        'email' => 'required|email',
+	        'phone' => 'required',
+	        'password' => 'confirmed'
+	    ]);
+
+		$user->email = $request->get('email');
+		$user->phone = $request->get('phone');
+		
+		if($request->get('password') != null)
+			$user->password = $request->get('password');
+
+		$user->save();
+		$data['response'] = "Usuario actualizado exitosamente";
+		$id = 1;
+		$user = User::find($id);
+		$payments = Payment::get_payments_from_user($id);
+		$data['user'] = $user;
+		$data['payments'] = $payments;
+		return $this->front_view('users.profile', $data);
+
 	}
 	
 	/**

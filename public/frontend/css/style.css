@@ -1,3 +1,5 @@
+.white{ color:white; }
+.white:hover{color:white;}
 .floatleft { float: left }
 .floatright { float: right }
 .alignleft {

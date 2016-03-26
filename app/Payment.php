@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model {
 	
-	public static function approve($id) {
+	public static function approve ($id) 
+	{
 		$payment = Payment::find($id);
 		$payment->status = "APPROVED";
 		$payment->save();
+		return $payment;
 		
 	}
 	
@@ -29,4 +31,5 @@ class Payment extends Model {
 		$payment->save();
 	
 	}
+
 }

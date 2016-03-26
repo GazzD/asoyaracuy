@@ -3,73 +3,86 @@
 <div class="wrapper">
 	<div class="container">
 		
+		<ul class="nav nav-tabs">
+	        <li class="active"><a data-toggle="tab" href="#sectionA">Actualizar Datos</a></li>
+	        <li><a data-toggle="tab" href="#sectionB">Registro de pagos</a></li>	      
+	    </ul>
 
-		{!! Form::open(array('route' => 'user.update')) !!}
-		<div id="customer_details" class="col2-set">
-			<div class="col-1">
-				<div class="woocommerce-billing-fields">
-					<h3>Informaci&oacute;n del usuario</h3>
-					<p id="billing_country_field" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
-						<label class="" for="billing_country">Nombre
-						</label> 
-						<label class="" for="billing_country">Nombre
-						</label>
-					</p>
+		<div class="tab-content">
+	        <div id="sectionA" class="tab-pane fade in active">
+	            <h3>Actualiza datos</h3>
+	            {!! Form::model($user, array('route' => array('user.update'))) !!}
+				{!! Form::hidden('id', $user->id) !!}
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<div id="customer_details" class="col2-set">
+					<div class="col-1">
+						<div class="woocommerce-billing-fields">
+							<h3>Informaci&oacute;n del usuario</h3>
+							<label class="" for="house">Quinta</label>
+							{!! Form::text(null, $user->house, ['readonly']) !!}
+							<label class="" for="phone">Tel&eacute;fono</label>
+							{!! Form::text('phone', $user->phone, array('placeholder' => 'Tel&eacute;fono')) !!}
+							<label class="" for="email">Email</label>
+							{!! Form::email('email', $user->email, array('placeholder' => 'Correo electrónico')) !!}
+							<label class="" for="password">Contrase&ntilde;a</label>
+							{!! Form::password('password', '', ['placeholder' => 'Contrase&ntilde;a']) !!}
+							<label class="" for="password-confirmation">Confirmaci&oacute;n de contrase&ntilde;a</label>
+							{!! Form::password('password-confirmation', '') !!}
+						</div>
+					</div>
+					<div>
+						@if(isset($errors)))
+							<p style="color:red;">{{$errors}}</p>
+						@endif
 
-					<p id="billing_first_name_field"
-						class="form-row form-row-first validate-required">
-						<label class="" for="billing_first_name">First Name <abbr
-							title="required" class="required">*</abbr>
-						</label> <input type="text" value="" placeholder=""
-							id="billing_first_name" name="billing_first_name"
-							class="input-text ">
-					</p>
-
-					<p id="billing_last_name_field"
-						class="form-row form-row-last validate-required">
-						<label class="" for="billing_last_name">Last Name <abbr
-							title="required" class="required">*</abbr>
-						</label> <input type="text" value="" placeholder=""
-							id="billing_last_name" name="billing_last_name"
-							class="input-text ">
-					</p>
+						@if(isset($response))
+							<p style="color:green;">{{$response}}</p>
+						@endif
+					</div>
+						
+				</div>
+				<button class="btn btn-success">Actualizar datos</button>
+				{!! Form::close() !!}
+	        </div>
+	        <div id="sectionB" class="tab-pane fade">
+	            <div id="customer_details" class="col2-set">
+		            <h3>Historial de pagos</h3>
+					<div class="table-responsive">
+					  	<table class="table">
+					    	<thead>
+					    	<tr>
+							  <th>#</th>
+							  <th>Quinta</th>
+							  <th>Tipo de pago</th>
+							  <th>Estado</th>
+							  <th>Codigo de confirmación</th>
+							  <th>Fecha de pago</th>
+							  <th>Monto</th>
+							</tr>
+					    	</thead>
+					    	<?php $i = 1;?>
+					    	@foreach ($payments as $payment)
+					    	<tr>
+							  <td>{{ $i++ }}</td>
+							  <td>{{ $payment->house }}</td>
+							  <td>{{ $payment->type }}</td>
+							  <td>{{ $payment->status }}</td>
+							  <td>{{ $payment->confirmation_code }}</td>
+							  <td>{{ $payment->date }}</td>
+							  <td>{{ $payment->amount }}</td>
+							</tr>
+							@endforeach
+						</table>
+					</div>
+					<a href="{{URL::route('payment.create')}}"><button class="btn btn-success">Registrar pago</button></a>
+					<br />
 				</div>
 			</div>
+	        </div>
 		</div>
-		<button class="btn btn-success">Actualizar datos</button>
-		{!! Form::close() !!}
-		<div id="customer_details" class="col2-set">
-			<h3>Pagos</h3>
-			<div class="table-responsive">
-			  	<table class="table">
-			    	<thead>
-			    	<tr>
-					  <th>#</th>
-					  <th>Quinta</th>
-					  <th>Tipo de pago</th>
-					  <th>Estado</th>
-					  <th>Codigo de confirmación</th>
-					  <th>Fecha de pago</th>
-					  <th>Monto</th>
-					</tr>
-			    	</thead>
-			    	<?php $i = 1;?>
-			    	@foreach ($payments as $payment)
-			    	<tr>
-					  <td>{{ $i++ }}</td>
-					  <td>{{ $payment->house }}</td>
-					  <td>{{ $payment->type }}</td>
-					  <td>{{ $payment->status }}</td>
-					  <td>{{ $payment->confirmation_code }}</td>
-					  <td>{{ $payment->date }}</td>
-					  <td>{{ $payment->amount }}</td>
-					</tr>
-					@endforeach
-				</table>
-			</div>
-			<a href="{{URL::route('payment.create')}}"><button class="btn btn-success">Registrar pago</button></a>
-			<br />
-		</div>
-	</div>
+
+		<!-- {!! Form::open(array('route' => 'user.update')) !!} -->
+		
+		
 </div>
 @endsection

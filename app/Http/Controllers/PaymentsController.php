@@ -48,7 +48,14 @@ class PaymentsController extends Controller
     
     public function approve($id) {
     	$data = $this->load_common_data();
+        // Approve payment
     	$payment = Payment::approve($id);
+
+        // Update balance
+        $user = User::find($payment->user_id);
+        $user->balance -= $payment->amount;
+        $user->save();
+
     	return redirect()->route('admin.payments');
     }
     

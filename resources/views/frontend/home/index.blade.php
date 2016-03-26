@@ -34,7 +34,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo2">
                         <i class="fa fa-truck"></i>
-                        <p>Estado de cuenta</p>
+                        <p><a class="white" href="{{route('profile')}}">Estado de cuenta</a></p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">

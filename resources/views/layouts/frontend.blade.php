@@ -16,8 +16,9 @@
 	    {!!Html::style('frontend/css/font-awesome.min.css')!!}
 	    <!-- Custom CSS -->
 	    {!!Html::style('frontend/css/owl.carousel.css')!!}
-        {!!Html::style('frontend/css/style.css')!!}
         {!!Html::style('frontend/css/responsive.css')!!}
+        {!!Html::style('frontend/css/style.css')!!}
+
 	
 	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +41,7 @@
 	                
 	                <div class="col-sm-6">
 	                    <div class="shopping-item">
-	                        <a href="{!!URL::route('profile')!!}">Balance - <span class="cart-amunt">{{$user->balance}} Bs</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+	                        <a href="{!!URL::route('profile')!!}">Balance : <span class="cart-amunt">{{$user->balance}} Bs</span> <!-- <i class="fa fa-shopping-cart"></i> --> <span class="product-count">5</span></a>
 	                    </div>
 	                </div>
 	            </div>
