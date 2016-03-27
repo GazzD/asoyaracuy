@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Payment;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -84,10 +85,9 @@ class UsersController extends Controller
 	 */
 	public function profile()
 	{
-		//FIXME
-		$id = 1;
-		$user = User::find($id);
-		$payments = Payment::get_payments_from_user($id);
+		$user = Auth::user();
+		// dump($user);die;
+		$payments = Payment::get_payments_from_user($user->id);
 		$data['user'] = $user;
 		$data['payments'] = $payments;
 		
@@ -125,18 +125,12 @@ class UsersController extends Controller
 
 		$user->email = $request->get('email');
 		$user->phone = $request->get('phone');
-		
+		dump($user);die;
 		if($request->get('password') != null)
 			$user->password = $request->get('password');
 
 		$user->save();
-		$data['response'] = "Usuario actualizado exitosamente";
-		$id = 1;
-		$user = User::find($id);
-		$payments = Payment::get_payments_from_user($id);
-		$data['user'] = $user;
-		$data['payments'] = $payments;
-		return $this->front_view('users.profile', $data);
+		return redirect(route('profile'));
 
 	}
 	

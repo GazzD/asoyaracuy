@@ -32,13 +32,13 @@
 		    	@foreach ($payments as $payment)
 		    	<tr>
 				  <td>{{ $i++ }}</td>
-				  <td>{{ $payment->house }}</td>
+				  <td>{{ $payment->user->house }}</td>
 				  <td>{{ $payment->type }}</td>
 				  <td>{{ $payment->status }}</td>
 				  <td>{{ $payment->confirmation_code }}</td>
 				  <td>{{ $payment->date }}</td>
 				  <td>{{ $payment->amount }}</td>
-				  <td><a href="{{URL::to('/admin/payment/detail/')}}/{{ $payment->id }}"><button class="btn btn-primary">Detalle</button></a></td>
+				  <td><a class="btn btn-primary" href="{{URL::route('admin.payment.detail', $payment->id)}}">Detalle</a></td>
 				</tr>
 				@endforeach
 			</table>

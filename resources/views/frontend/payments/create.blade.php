@@ -38,6 +38,7 @@
 					</p>
 				</div>
 				<button class="btn btn-success">Registrar pago</button>
+				<a class="btn btn-primary" href="{{route('profile')}}">Volver</a>
 			</div>
 		</div>
 		{!! Form::close() !!}

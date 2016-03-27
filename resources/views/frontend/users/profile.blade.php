@@ -11,8 +11,7 @@
 		<div class="tab-content">
 	        <div id="sectionA" class="tab-pane fade in active">
 	            <h3>Actualiza datos</h3>
-	            {!! Form::model($user, array('route' => array('user.update'))) !!}
-				{!! Form::hidden('id', $user->id) !!}
+	            {!! Form::open(array('route' => array('update-profile'))) !!}				
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div id="customer_details" class="col2-set">
 					<div class="col-1">
@@ -30,15 +29,6 @@
 							{!! Form::password('password-confirmation', '') !!}
 						</div>
 					</div>
-					<div>
-						@if(isset($errors)))
-							<p style="color:red;">{{$errors}}</p>
-						@endif
-
-						@if(isset($response))
-							<p style="color:green;">{{$response}}</p>
-						@endif
-					</div>
 						
 				</div>
 				<button class="btn btn-success">Actualizar datos</button>
@@ -48,6 +38,7 @@
 	            <div id="customer_details" class="col2-set">
 		            <h3>Historial de pagos</h3>
 					<div class="table-responsive">
+					@if(count($payments) > 0)
 					  	<table class="table">
 					    	<thead>
 					    	<tr>
@@ -73,16 +64,15 @@
 							</tr>
 							@endforeach
 						</table>
+					@else
+						<p>No se han realizado pagos todav&iacute;a</p>
+					@endif
 					</div>
 					<a href="{{URL::route('payment.create')}}"><button class="btn btn-success">Registrar pago</button></a>
 					<br />
 				</div>
 			</div>
-	        </div>
-		</div>
-
-		<!-- {!! Form::open(array('route' => 'user.update')) !!} -->
-		
-		
+        </div>
+	</div>
 </div>
 @endsection

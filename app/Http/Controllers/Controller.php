@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Payment;
 use App\User;
+use Auth;
 
 class Controller extends BaseController
 {
@@ -18,7 +19,7 @@ class Controller extends BaseController
     }
     
     protected function front_view($view, $data=array()){
-    	$user = User::find(1);
+    	$user = Auth::user();
     	$data['user'] = $user;
 
     	return view('frontend.'.$view, $data);
@@ -32,3 +33,4 @@ class Controller extends BaseController
     	return $data;
     }
 }
+
