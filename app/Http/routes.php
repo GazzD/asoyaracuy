@@ -37,6 +37,12 @@ Route::group(['middleware' => 'web'], function () {
 			
 	]);
 
+	Route::get('/perfil/pagos/descargar-factura/{id}', [
+			'uses' => 'ProfileController@downloadPDF',
+			'as' => 'profile.invoice'
+			
+	]);
+
 	Route::get('/pagos/registrar', [
 			'uses' => 'ProfileController@createPayment',
 			'as' => 'payment.create'
