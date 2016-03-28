@@ -9,6 +9,11 @@ use App\User;
 
 class PaymentsController extends Controller
 {
+    public function __construct()
+    {
+        if(Auth::user()->role == 'USER') return redirect(route('home'));
+    }
+
     public function index() {
     	$data = $this->load_common_data();
     	$payments = Payment::all();

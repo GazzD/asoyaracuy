@@ -11,10 +11,10 @@ use Auth;
 
 class UsersController extends Controller
 {
-	public function login()
-	{
-		return view('frontend.users.login');
-	}
+	public function __construct()
+    {
+        if(Auth::user()->role == 'USER') return redirect(route('home'));
+    }
 	
 	/**
 	 * Show the form for creating a new resource.
@@ -44,17 +44,14 @@ class UsersController extends Controller
 	public function store(Request $request)
 	{
 		$response = "";
-		$user = User::find_by_house($request->input('house'));
-		if($user == null){
 	
-			$response = "Error, la quinta no está registrada";
-			return view('users.register', ['response' => $response]);
-		}
-	
-	
-		$validation = Validator::make($request->all(),User::getRules());
-		if($validation->fails())
-		{
+		$validation = Validator::make($request->all(),[
+            'house' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+		if($validation->fails()){
 	
 			return redirect()->back()->withInput()->withErrors($validation->messages());
 		}
