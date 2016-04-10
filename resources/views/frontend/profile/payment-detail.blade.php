@@ -17,7 +17,7 @@
 				<div class="panel-body"><span>Tipo de pago: </span>{{$payment->type}}</div>
 				<div class="panel-body"><span>Nota: </span>{{$payment->note}}</div>
 			</div>		
-			<a href="{{route('profile.invoce')}}"><button class="btn btn-success">Descargar Factura</button></a><a href="{{route('profile')}}"><button class="btn btn-primary">Volver</button></a>
+			<a href="{{route('profile.invoice')}}"><button class="btn btn-success">Descargar Factura</button></a><a href="{{route('profile')}}"><button class="btn btn-primary">Volver</button></a>
 		</section>
 		<div class="col-md-3"></div>
 	</div>
