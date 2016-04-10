@@ -18,16 +18,16 @@
 		<h2>Usuario</h2>
 		<div class="panel panel-primary">
 			<div class="panel-heading">Detalles del usuario</div>
-			<div class="panel-body"><span>Nombre: </span>{{$user->first_name}}</div>
-			<div class="panel-body"><span>Apellido: </span>{{$user->last_name}}</div>
 			<div class="panel-body"><span>Quinta: </span>{{$user->house}}</div>
-			<div class="panel-body"><span>C&eacute;dula: </span>{{$user->ci}}</div>
 			<div class="panel-body"><span>Tel&eacute;fono: </span>{{$user->phone}}</div>
 			<div class="panel-body"><span>Email: </span>{{$user->email}}</div>
 			<div class="panel-body"><span>Rol: </span>{{$user->role}}</div>
+			@if(isset($specialFee))
+			<div class="panel-body"><span>Cuota especial: </span>{{$specialFee->amount}}</div>	
+			@endif
 		</div>
 		
-		<a href="{{URL::route('admin.user.update', $user->id)}}"><button class="btn btn-success">Editar</button></a>
+		<a href="{{URL::route('admin.user.edit', $user->id)}}"><button class="btn btn-success">Editar</button></a>
 		<a href="{{URL::route('admin.user.delete', $user->id)}}"><button class="btn btn-danger">Eliminar</button></a>
 		<a href="{{URL::route('admin.users')}}"><button class="btn btn-primary">Volver</button></a>
 	</section>
