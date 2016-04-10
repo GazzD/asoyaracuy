@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\User;
 use App\Payment;
 use Auth;
+use PDF;
 use Validator;
 
 class ProfileController extends Controller
