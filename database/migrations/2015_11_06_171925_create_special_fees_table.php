@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecialFeeTable extends Migration
+class CreateSpecialFeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSpecialFeeTable extends Migration
      */
     public function up()
     {
-          Schema::create('special_fee', function (Blueprint $table) {
+          Schema::create('special_fees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('amount');
@@ -30,6 +30,6 @@ class CreateSpecialFeeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('special_fee');
+        Schema::drop('special_fees');
     }
 }

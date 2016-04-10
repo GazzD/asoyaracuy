@@ -23,4 +23,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function findByHouse($name){
+
+        $house = User::Where('house',$name);
+
+        return $house;
+    }
 }

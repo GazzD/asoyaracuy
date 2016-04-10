@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialPayment extends Model
+class SpecialFee extends Model
 {
     protected $fillable = [
         'user_id', 'amount', 'status'

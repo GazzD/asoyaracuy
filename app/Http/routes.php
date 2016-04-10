@@ -13,6 +13,21 @@
 /* Authenticated users */
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+
+
+Route::get('login', [
+	'uses' => 'Auth\AuthController@getLogin',
+	'as' => 'login'
+	]);
+Route::post('iniciar-sesion', [
+	'uses' => 'Auth\AuthController@postLogin',
+	'as' => 'login'
+	]);
+Route::get('cerrar-sesion', [
+	'uses' => 'Auth\AuthController@getLogout',
+	'as' => 'logout'
+]);
+
 	
 	/************************** Frontend **************************/
     Route::get('/', [
@@ -91,11 +106,15 @@ Route::group(['middleware' => 'web'], function () {
 			'uses' => 'UsersController@index',
 			'as' => 'admin.users'
 	]);
-	Route::get('/admin/usurios/detalle/{id}', [
+	Route::get('/admin/usuarios/detalle/{id}', [
 			'uses' => 'UsersController@detail',
 			'as' => 'admin.user.detail'
 	]);
 	Route::get('/admin/usuarios/actualizar/{id}', [
+			'uses' => 'UsersController@edit',
+			'as' => 'admin.user.edit'
+	]);
+	Route::post('/admin/usuarios/actualizar/', [
 			'uses' => 'UsersController@update',
 			'as' => 'admin.user.update'
 	]);
@@ -103,24 +122,19 @@ Route::group(['middleware' => 'web'], function () {
 			'uses' => 'UsersController@delete',
 			'as' => 'admin.user.delete'
 	]);
+	Route::get('/admin/cuotasEspeciales/borrar/{id}', [
+			'uses' => 'SpecialFeeController@delete',
+			'as' => 'admin.specialfee.delete'
+	]);
+	Route::get('/admin/cuotas-especiales/listar', [
+			'uses' => 'SpecialFeeController@index',
+			'as' => 'admin.specialfee'
+	]);
 
 });
 
 /************************** Frontend **************************/
 
-
-Route::get('login', [
-	'uses' => 'Auth\AuthController@getLogin',
-	'as' => 'login'
-	]);
-Route::post('iniciar-sesion', [
-	'uses' => 'Auth\AuthController@postLogin',
-	'as' => 'login'
-	]);
-Route::get('cerrar-sesion', [
-	'uses' => 'Auth\AuthController@getLogout',
-	'as' => 'logout'
-]);
 
 
 /*

@@ -277,19 +277,9 @@
 						<li>
 							{!! HTML::decode(link_to_route('admin.users', '<i class="fa fa-dashboard"></i><span>Usuarios</span>')) !!}
 						</li>
-						<li class="treeview"><a href="#"> <i class="fa fa-pie-chart"></i> <span>Charts</span>
-								<i class="fa fa-angle-left pull-right"></i>
-						</a>
-							<ul class="treeview-menu">
-								<li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>
-										ChartJS</a></li>
-								<li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>
-										Morris</a></li>
-								<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>
-										Flot</a></li>
-								<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i>
-										Inline charts</a></li>
-							</ul></li>
+						<li>
+							{!! HTML::decode(link_to_route('admin.specialfee', '<i class="fa fa-dashboard"></i><span>Cuotas Especiales</span>')) !!}
+						</li>
 						<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i> <span>UI
 									Elements</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>

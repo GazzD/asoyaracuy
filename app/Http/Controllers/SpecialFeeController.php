@@ -7,13 +7,14 @@ use App\Payment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use App\SpecialFee;
 
 class SpecialFeeController extends Controller
 {
     public function index() {
     	$data = $this->load_common_data();
-    	$specialPayments = SpecialFee::all();
-    	$data['payments'] = $specialFee;
+    	$specialFees = SpecialFee::where('status','ENABLED')->get();
+    	$data['specialFees'] = $specialFees;
     	return $this->back_view('specialfee.list', $data);
     }
     
@@ -23,40 +24,26 @@ class SpecialFeeController extends Controller
     
     public function store(Request $request) {
     	$user = Auth::user();
-    	
+    	$id = $request->input('user_id');
+    	$oldFee = SpecialFee::where('user_id',$id)->where('status','ENABLED')->first();
+    	var_dump($oldFee);die;
+    	if($oldFee != null){
+    		$oldFee->status = 'DISABLED';
+    		$oldFee->save();	
+    	}
     	$fee = new SpecialFee();
     	$fee->user_id = $request->input('user_id');
     	$fee->amount = $request->input('amount');
     	$fee->status = "ENABLED";
        	$fee->save();
    
-    	return redirect(route('profile'));
+    	return redirect(route('admin'));
     }
     
-    public function detail($id) {
-    	$data = $this->load_common_data();
-    	$payment = Payment::find($id);
-    	$data['payment'] = $payment;
-    	return $this->back_view('payments.detail', $data);
-    }
-    
-    public function approve($id) {
-    	$data = $this->load_common_data();
-        // Approve payment
-    	$payment = Payment::approve($id);
+    public function delete($id){
+    	$specialFee = SpecialFee::find($id);
+    	$specialFee->delete();
 
-        // Update balance
-        $user = User::find($payment->user_id);
-        $user->balance -= $payment->amount;
-        $user->save();
-
-    	return redirect()->route('admin.payments');
-    }
-    
-    public function reject($id) {
-    	$data = $this->load_common_data();
-    	$payment = Payment::reject($id);
-    	return redirect()->route('admin.payments');
-    }
-    
-}
+		return redirect(route('admin'));		
+	}
+}	

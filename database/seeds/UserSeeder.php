@@ -12,14 +12,24 @@ class UserSeeder extends Seeder
      */
 	public function run()
     {
+    	$roles = ['USER', 'ADMIN', 'DIRECTIVE', 'COLLECTOR'];
+    	$user = new User();
+		$user->balance = rand(-1000, 1000);
+		$user->email = "choroni@mail.com";
+		$user->phone = "0212-235-1434";
+		$user->house = "Choroni";
+		$user->role = 'ADMIN';
+		$user->password = bcrypt('123456');
+		$user->save();
+			
     	for ($i = 1; $i <= 10; ++$i){
 	    	$user = new User();
 			$user->balance = rand(-1000, 1000);
 			$user->email = "user-$i@mail.com";
 			$user->phone = "0212-238-111$i";
 			$user->house = "Casa $i";
-			$user->role = "USER";
-			$user->password = "123456";
+			$user->role = $roles[rand(0,3)];
+			$user->password = bcrypt('123456');
 			$user->save();
     	}
     }
