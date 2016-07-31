@@ -36,6 +36,10 @@
 						<?php echo FORM::text('amount'); ?>
 
 					</p>
+					<label class="" for="date">Fecha<abbr title="required" class="required">*</abbr>
+					</label>
+					<div id="datepicker" data-date="12/03/2012"></div>
+					<input type="hidden" id="my_hidden_input">
 					<p id="note" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
 						<label class="" for="billing_country">Nota
 						</label>
@@ -54,4 +58,19 @@
 </div>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('custom_script'); ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#datepicker').datepicker();
+		$('#datepicker').on("changeDate", function() {
+		    $('#my_hidden_input').val(
+		        $('#datepicker').datepicker('getFormattedDate')
+		    );
+		});
+
+    });
+
+
+</script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.frontend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

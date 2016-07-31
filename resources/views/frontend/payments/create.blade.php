@@ -31,6 +31,13 @@
 						</label>
 						{!!FORM::text('amount')!!}
 					</p>
+					<input data-provide="datepicker">
+					<div class="input-group date" data-provide="datepicker">
+					    <input type="text" class="form-control">
+					    <div class="input-group-addon">
+					        <span class="glyphicon glyphicon-th"></span>
+					    </div>
+					</div>
 					<p id="note" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
 						<label class="" for="billing_country">Nota
 						</label>
@@ -46,3 +53,14 @@
 	
 </div>
 @endsection
+
+@section('custom_script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+
+    });
+
+
+</script>
+@ensection

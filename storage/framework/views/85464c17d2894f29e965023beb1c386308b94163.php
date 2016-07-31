@@ -1,7 +1,7 @@
  <?php $__env->startSection('content'); ?>
 
 <!-- Main row -->
-<div class="content-wrapper">
+<div class="content-wrapper" style="height: 652px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
@@ -16,52 +16,122 @@
 	<!-- Main content -->
 	<section class="content col-md-5">
 		<h2>Agregar Usuario</h2>
-		<?php echo Form::open(array('url' => 'foo/bar')); ?>
 
-			<div class="form-group">
-		      <label for="first_name">Nombres:</label>
-				<?php echo Form::text('first_name', null , array('placeholder' => 'nombre', 'class' => 'form-control')); ?>
+		<div class="container">
+		    <div class="row">
+		        <div class="col-md-8">
+		            <div class="panel panel-default">
+		                <div class="panel-heading">Nuevo usuario</div>
+		                <div class="panel-body">
+		                    <?php echo Form::open(array('route' => 'admin.user.store', 'class' => 'form-horizontal')); ?>
 
+		                        <?php echo csrf_field(); ?>
+
+
+		                        <div class="form-group<?php echo e($errors->has('house') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Quinta</label>
+
+		                            <div class="col-md-6">
+		                            	<?php echo Form::text('house', old('house') , array('placeholder' => 'casa', 'class' => 'form-control')); ?>
+
+
+		                                <?php if($errors->has('house')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('house')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+
+		                        <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Correo electr&oacute;nico</label>
+
+		                            <div class="col-md-6">
+		                                <input type="email" class="form-control" name="email" value="<?php echo e(old('email')); ?>" placeholder="quinta@mail.com">
+
+		                                <?php if($errors->has('email')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('email')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+
+		                        <div class="form-group<?php echo e($errors->has('phone') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Tel&eacute;fono</label>
+
+		                            <div class="col-md-6">
+		                                <input type="text" class="form-control" name="phone" value="<?php echo e(old('phone')); ?>" placeholder="(0212) 5555555">
+
+		                                <?php if($errors->has('phone')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('phone')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+
+		                        <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Contrase&ntilde;a</label>
+
+		                            <div class="col-md-6">
+		                                <input type="password" class="form-control" name="password">
+
+		                                <?php if($errors->has('password')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('password')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+
+		                        <div class="form-group<?php echo e($errors->has('password_confirmation') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Confirmaci&oacute;n de contrase&ntilde;a</label>
+
+		                            <div class="col-md-6">
+		                                <input type="password" class="form-control" name="password_confirmation">
+
+		                                <?php if($errors->has('password_confirmation')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('password_confirmation')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+								
+								<div class="form-group<?php echo e($errors->has('password_confirmation') ? ' has-error' : ''); ?>">
+		                            <label class="col-md-4 control-label">Rol</label>
+
+		                            <div class="col-md-6">
+		                                <?php echo Form::select('role', array('USER' => 'Usuario', 'ADMIN' => 'Administrador', 'DIRECTIVE' => 'Junta directiva', 'COLLECTOR' => 'Cobrador'), ['class' => 'form-control']); ?>
+
+		                                <?php if($errors->has('role')): ?>
+		                                    <span class="help-block">
+		                                        <strong><?php echo e($errors->first('role')); ?></strong>
+		                                    </span>
+		                                <?php endif; ?>
+		                            </div>
+		                        </div>
+		                        <?php if(isset($response)): ?>
+								<span class="help-block">
+                                    <strong><?php echo e($response); ?></strong>
+                                </span>
+								<?php endif; ?>
+		                        <div class="form-group">
+		                            <div class="col-md-6 col-md-offset-4">
+		                                <button type="submit" class="btn btn-success">
+		                                    <i class="fa fa-btn fa-user"></i> Agregar
+		                                </button>
+		                                <a href="<?php echo e(URL::route('admin.users')); ?>" class="btn btn-primary">Volver</a>
+		                            </div>
+		                        </div>
+		                    <?php echo Form::close(); ?>
+
+		                </div>
+		            </div>
+		        </div>
 		    </div>
-		    <div class="form-group">
-		      <label for="last_name">Apellidos:</label>
-		    <?php echo Form::text('last_name', null , array('placeholder' => 'apellido', 'class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="ci">C&eacute;dula:</label>
-		    <?php echo Form::text('ci', null , array('placeholder' => '123456789', 'class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="email">Correo electr&oacute;nico:</label>
-		    <?php echo Form::email('email', null , array('placeholder' => 'example@mail.com', 'class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="phone">Tel&eacute;fono:</label>
-		    <?php echo Form::text('phone', null , array('placeholder' => '(0212) 111 22 22', 'class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="password">Contrase&ntilde;a:</label>
-		    <?php echo Form::password('password', array('class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="password_confirmation">Confirmaci&oacute;n de contrase&ntilde;a:</label>
-		    <?php echo Form::password('password_confirmation', array('class' => 'form-control')); ?>
-
-		    </div>
-		    <div class="form-group">
-		      <label for="role">Role:</label>
-		    <?php echo Form::select('role', array('CONTENT_ADMIN' => 'Administrador de contenido', 'PAYMENT_ADMIN' => 'Administrado de pagos', 'USER_ADMIN' => 'Administrador de usuarios', 'DIRECTIVE' => 'Junta directiva', 'SUPER_ADMIN' => 'Super administrador'), ['class' => 'form-control']); ?>
-
-		    </div>
-		    
-		<?php echo Form::close(); ?>
-
-		<a href="<?php echo e(URL::route('admin.users')); ?>"><button class="btn btn-primary">Volver</button></a>
+		</div>
 	</section>
 	<div class = "col-md-3"></div>
 </div>

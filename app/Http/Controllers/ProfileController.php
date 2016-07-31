@@ -73,8 +73,11 @@ class ProfileController extends Controller
 	public function storePayment(Request $request) {
     	$user = Auth::user();
     	
+    	dump($request->all());die;
+
     	$payment = new Payment();
     	$payment->bank = $request->input('bank');
+    	$payment->date = $request->input('date');
     	$payment->type = $request->input('type');
     	$payment->confirmation_code = $request->input('confirmation_code');
     	$payment->amount = $request->input('amount');

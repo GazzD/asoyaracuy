@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('house')->unique();
             $table->string('password', 60);
             $table->string('phone');
+            $table->enum('status',['ENABLED','DISABLED'])->default('ENABLED');
             $table->enum('role',['USER','ADMIN','DIRECTIVE','COLLECTOR']);
             $table->rememberToken();
             $table->timestamps();

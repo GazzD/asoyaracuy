@@ -31,7 +31,7 @@ class UsersController extends Controller
 	
 	public function index() {
     	$data = $this->load_common_data();
-    	$users = User::all();
+    	$users = User::where('status','ENABLED')->get();
     	$data['users'] = $users;
     	return $this->back_view('users.list', $data);
     }
@@ -48,8 +48,8 @@ class UsersController extends Controller
     
 	public function store(Request $request)
 	{
+
 		$response = "";
-	
 		$validation = Validator::make($request->all(),[
             'house' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
@@ -63,20 +63,21 @@ class UsersController extends Controller
 	
 		User::create([
 				'balance' => 0,
-				'email' => $request->input('email'),
-				'house' => $request->input('house'),
-				'password' => bcrypt($request->input('password')),
-				'phone' => $request->input('phone'),
-				'role' => $request->input('role'),
+				'email' => $request->get('email'),
+				'house' => $request->get('house'),
+				'password' => bcrypt($request->get('password')),
+				'phone' => $request->get('phone'),
+				'status' => 'ENABLED',
+				'role' => $request->get('role'),
 		]);
-		$response = 'Quinta creada exitosamente';
+		$response = 'Usuario creado exitosamente';
 		/*
 		 $Autorid = Auth::id();
 		 $action = 'Crear Usuario';
 		 $value = $user->house;
 		 $this->setHistory($Autorid,$action,$value);*/
 	
-		return view('admin.home',['response' => $response]);
+		return redirect()->route('admin.users')->with(['response' => $response]);
 	}
 	
 	/**
@@ -167,8 +168,23 @@ class UsersController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function delete($id)
 	{
-		//
+		$user = User::find($id);
+    	$user->house = '[DISABLED-'.date('Y-m-d H:i:s').']'.$user->house;
+    	$user->email = '[DISABLED-'.date('Y-m-d H:i:s').']'.$user->email;
+    	$user->status = 'DISABLED';
+    	$user->save();
+    	$payments = Payment::get_payments_from_user($user->id);
+    	$specialFee = SpecialFee::where('user_id',$id)->where('status','ENABLED');
+    	if($specialFee != null){
+    		$specialFee->user_status = 'DISABLED';
+    		// $specialFee->save();
+    	}
+    	foreach($payments as $payment){
+    		$payment->user_status = 'DISABLED';
+    		$payment->save();
+    	}
+		return redirect(route('admin.users'));
 	}
 }

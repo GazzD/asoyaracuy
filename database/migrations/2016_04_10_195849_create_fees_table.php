@@ -12,10 +12,11 @@ class CreateFeesTable extends Migration
      */
     public function up()
     {
-          Schema::create('fees', function (Blueprint $table) {
+        Schema::create('fees', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('amount', 10, 2);
-            $table->boolean('enabled');
+            $table->string('amount');
+            $table->enum('status', ['ENABLED', 'DISABLED']);
+            $table->date('last_collection');
             $table->timestamps();
         });
     }

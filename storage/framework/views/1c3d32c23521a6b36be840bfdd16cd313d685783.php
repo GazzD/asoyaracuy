@@ -21,6 +21,8 @@
 
         <?php echo Html::style('frontend/css/responsive.css'); ?>
 
+        <?php echo Html::style('frontend/css/bootstrap-datepicker.css'); ?>
+
         <?php echo Html::style('frontend/css/style.css'); ?>
 
 
@@ -160,5 +162,8 @@
 
 	    <?php echo Html::script('frontend/js/script.slider.js'); ?>
 
+	    <?php echo Html::script('frontend/js/bootstrap-datepicker.js'); ?>
+
+	    <?php echo $__env->yieldContent('custom_script'); ?>
     </body>
 </html>

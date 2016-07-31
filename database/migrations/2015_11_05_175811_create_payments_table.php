@@ -17,14 +17,14 @@ class CreatePaymentsTable extends Migration
             $table->decimal('amount',10,2);
             $table->string('bank');
             $table->string('confirmation_code');
-            $table->date('date');
+            $table->string('date');
             $table->string('file');
             $table->string('note');
-            $table->enum('type', ['DEPOSIT', 'TRANSFERENCE']);
+            $table->enum('type', ['DEPOSIT', 'TRANSFERENCE','CASH']);
             $table->enum('status', ['APPROVED', 'PENDING', 'REJECTED']);
+            $table->enum('user_status',['ENABLED','DISABLED'])->default('ENABLED');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-
             $table->foreign('user_id')->references('id')->on('users');
         });
         

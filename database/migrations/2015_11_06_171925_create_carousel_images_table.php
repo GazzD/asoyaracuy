@@ -16,7 +16,7 @@ class CreateCarouselImagesTable extends Migration
             $table->increments('id');
             $table->string('image');
             $table->string('name');
-            $table->integer('state');
+            $table->enum('status',['ENABLED','DISABLED']);
             $table->timestamps();
         });
     }

@@ -37,11 +37,11 @@
     	<div class="wrapper">
 	    	<header class="main-header">
 			    <!-- Logo -->
-			    <a href="index2.html" class="logo">
+			    <a href="{{route('home')}}" class="logo">
 			      <!-- mini logo for sidebar mini 50x50 pixels -->
-			      <span class="logo-mini"><b>A</b>LT</span>
+			      <span class="logo-mini"><b>AsoY</b></span>
 			      <!-- logo for regular state and mobile devices -->
-			      <span class="logo-lg"><b>Admin</b>LTE</span>
+			      <span class="logo-lg"><b>Asoyaracuy</b></span>
 			    </a>
 			    <!-- Header Navbar: style can be found in header.less -->
 			    <nav class="navbar navbar-static-top" role="navigation">
@@ -201,7 +201,7 @@
 			          <li class="dropdown user user-menu">
 			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			              <img alt="Imagen de usuario" src="{!! asset('backend/img/user2-160x160.jpg') !!}" class="user-image">
-			              <span class="hidden-xs">Alexander Pierce</span>
+			              <span class="hidden-xs">{{$authUser->house}}</span>
 			            </a>
 			            <ul class="dropdown-menu">
 			              <!-- User image -->
@@ -209,17 +209,17 @@
 			                <img alt="Imagen de usuario" src="{!! asset('backend/img/user2-160x160.jpg') !!}" class="img-circle">
 			
 			                <p>
-			                  Alexander Pierce - Web Developer
-			                  <small>Member since Nov. 2012</small>
+			                  Quinta - {{$authUser->house}}
+			                  <small>&Uacute;ltima actualizaci&oacute;n {{$authUser->updated_at}}</small>
 			                </p>
 			              </li>
 			              <!-- Menu Footer-->
 			              <li class="user-footer">
 			                <div class="pull-left">
-			                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+			                  <a href="{{route('profile')}}" class="btn btn-default btn-flat">Perfil</a>
 			                </div>
 			                <div class="pull-right">
-			                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+			                  <a href="{{route('admin-logout')}}" class="btn btn-default btn-flat">Cerrar Sessi&oacute;n</a>
 			                </div>
 			              </li>
 			            </ul>
@@ -242,7 +242,7 @@
 							<img alt="Imagen de usuario" src="{!! asset('backend/img/user2-160x160.jpg') !!}" class="img-circle">
 						</div>
 						<div class="pull-left info">
-							<p>Alexander Pierce</p>
+							<p>{{$authUser->house}}</p>
 							<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 						</div>
 					</div>
@@ -280,6 +280,7 @@
 						<li>
 							{!! HTML::decode(link_to_route('admin.specialfee', '<i class="fa fa-dashboard"></i><span>Cuotas Especiales</span>')) !!}
 						</li>
+						<!--
 						<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i> <span>UI
 									Elements</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
@@ -365,6 +366,7 @@
 								<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
 							</ul></li>
 						<li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+						!-->
 						<li class="header">LABELS</li>
 						<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 						<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -378,7 +380,7 @@
 				<div class="pull-right hidden-xs">
 					<b>Version</b> 2.3.2
 				</div>
-				<strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+				<strong>Copyright &copy; 2016 Desarrollado por <a href="http://www.cyberia-server.com.ve" target="_blank">Cyberia LabTech</a></strong>.
 			</footer>
 		</div>
         <!-- jQuery 2.1.4 -->

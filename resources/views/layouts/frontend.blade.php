@@ -17,6 +17,7 @@
 	    <!-- Custom CSS -->
 	    {!!Html::style('frontend/css/owl.carousel.css')!!}
         {!!Html::style('frontend/css/responsive.css')!!}
+        {!!Html::style('frontend/css/bootstrap-datepicker.css')!!}
         {!!Html::style('frontend/css/style.css')!!}
 
 	
@@ -149,5 +150,7 @@
 	    <!-- Slider -->
 	    {!!Html::script('frontend/js/bxslider.min.js')!!}
 	    {!!Html::script('frontend/js/script.slider.js')!!}
+	    {!!Html::script('frontend/js/bootstrap-datepicker.js')!!}
+	    @yield('custom_script')
     </body>
 </html>

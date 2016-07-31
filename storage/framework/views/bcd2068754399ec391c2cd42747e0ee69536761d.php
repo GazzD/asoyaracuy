@@ -78,4 +78,5 @@
         </div>
     </div> <!-- End promo area -->
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.frontend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

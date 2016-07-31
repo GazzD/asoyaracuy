@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
 		$user->house = "Choroni";
 		$user->role = 'ADMIN';
 		$user->password = bcrypt('123456');
+		$user->status = 'ENABLED';
 		$user->save();
 			
     	for ($i = 1; $i <= 10; ++$i){
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
 			$user->house = "Casa $i";
 			$user->role = $roles[rand(0,3)];
 			$user->password = bcrypt('123456');
+			$user->status = 'ENABLED';
 			$user->save();
     	}
     }

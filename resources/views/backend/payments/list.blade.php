@@ -21,6 +21,7 @@
 				  <th>#</th>
 				  <th>Quinta</th>
 				  <th>Tipo de pago</th>
+				  <th>Banco</th>
 				  <th>Estado</th>
 				  <th>Codigo de confirmación</th>
 				  <th>Fecha de pago</th>
@@ -34,6 +35,7 @@
 				  <td>{{ $i++ }}</td>
 				  <td>{{ $payment->user->house }}</td>
 				  <td>{{ $payment->type }}</td>
+				  <td>{{ $payment->bank }}</td>
 				  <td>{{ $payment->status }}</td>
 				  <td>{{ $payment->confirmation_code }}</td>
 				  <td>{{ $payment->date }}</td>

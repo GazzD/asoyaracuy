@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fee extends Model
 {
     protected $fillable = [
-        'amount', 'enabled'
+        'amount', 'last_collection', 'status'
     ];
 
 }

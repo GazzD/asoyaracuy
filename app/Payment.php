@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use DB;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,8 +21,15 @@ class Payment extends Model {
 		
 	}
 	
+	public static function get_all_money_collected() {
+		$total = DB::table('payments')
+                ->where('status', 'APPROVED')
+                ->sum('amount');
+        return $total;
+	}
+
 	public static function get_pending_payments_count() {
-		$payments = Payment::where('status', '=', 'PENDING')->get();
+		$payments = Payment::where('status', '=', 'PENDING')->where('user_status','ENABLED')->get();
 		return count($payments);
 	}
 	

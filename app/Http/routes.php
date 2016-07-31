@@ -78,6 +78,10 @@ Route::get('cerrar-sesion', [
 			'uses' => 'BackendController@login',
 			'as' => 'admin-login'
 	]);
+	Route::get('/admin', [
+			'uses' => 'BackendController@logout',
+			'as' => 'admin-logout'
+	]);
 	Route::get('/admin/pagos/listar', [
 			'uses' => 'PaymentsController@index',
 			'as' => 'admin.payments'

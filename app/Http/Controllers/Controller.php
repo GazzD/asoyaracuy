@@ -15,22 +15,24 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected function back_view($view, $data=array()){
-    	return view('backend.'.$view, $data);
+        $user = Auth::user();
+        $data['authUser'] = $user;
+        return view('backend.'.$view, $data);
     }
     
     protected function front_view($view, $data=array()){
-    	$user = Auth::user();
-    	$data['user'] = $user;
+        $user = Auth::user();
+        $data['user'] = $user;
 
-    	return view('frontend.'.$view, $data);
+        return view('frontend.'.$view, $data);
     }
     
     protected function load_common_data(){
-    	$payments_count = Payment::get_pending_payments_count();
-    	$data = array(
-    			'payments_count' => $payments_count
-    	);
-    	return $data;
+        $payments_count = Payment::get_pending_payments_count();
+        $data = array(
+                'payments_count' => $payments_count
+        );
+        return $data;
     }
 }
 

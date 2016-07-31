@@ -21,6 +21,7 @@
 				  <th>#</th>
 				  <th>Quinta</th>
 				  <th>Tipo de pago</th>
+				  <th>Banco</th>
 				  <th>Estado</th>
 				  <th>Codigo de confirmación</th>
 				  <th>Fecha de pago</th>
@@ -34,6 +35,7 @@
 				  <td><?php echo e($i++); ?></td>
 				  <td><?php echo e($payment->user->house); ?></td>
 				  <td><?php echo e($payment->type); ?></td>
+				  <td><?php echo e($payment->bank); ?></td>
 				  <td><?php echo e($payment->status); ?></td>
 				  <td><?php echo e($payment->confirmation_code); ?></td>
 				  <td><?php echo e($payment->date); ?></td>

@@ -16,7 +16,7 @@
 				<div class="panel-body"><span>Tipo de pago: </span><?php echo e($payment->type); ?></div>
 				<div class="panel-body"><span>Nota: </span><?php echo e($payment->note); ?></div>
 			</div>		
-			<a href="<?php echo e(route('profile')); ?>"><button class="btn btn-primary">Volver</button></a>
+			<a href="<?php echo e(route('profile.invoice', $payment->id)); ?>"><button class="btn btn-success">Descargar Factura</button></a><a href="<?php echo e(route('profile')); ?>"><button class="btn btn-primary">Volver</button></a>
 		</section>
 		<div class="col-md-3"></div>
 	</div>

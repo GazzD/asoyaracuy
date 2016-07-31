@@ -30,4 +30,11 @@ class User extends Authenticatable
 
         return $house;
     }
+
+    public static function getDebtors(){
+
+        $debtorsCount = User::Where('balance', '>', 0)->count();
+
+        return $debtorsCount;
+    }
 }
